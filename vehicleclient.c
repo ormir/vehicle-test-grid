@@ -18,15 +18,14 @@ int main(int argc, char const *argv[]) {
 	}
 
 	// Send message
-	msg.mType=1;
-	strncpy(msg.mText,argv[1],MAX_DATA);
+	msg.mType = 1;
+	strncpy(msg.mText, argv[1][0], MAX_DATA);
 	if(msgsnd(msgid, &msg, sizeof(msg)-sizeof(long), 0) == -1){
 		// error handling 
 		fprintf(stderr, "%s: Can't send message\n", argv[0]);
 		return EXIT_FAILURE;
 	}
-	printf("Message sent: %s\n", msg.mText);
-	return EXIT_SUCCESS;
+	printf("Name sent: %s\n", msg.mText);
 
 	// Get message
 	while (1) {
@@ -39,5 +38,5 @@ int main(int argc, char const *argv[]) {
 		printf("Message received: %s\n", msg.mText);
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }

@@ -5,6 +5,12 @@ int running = 1;
 char * field;
 int x, y;
 
+typedef struct {
+	char name;
+	int x, y;
+	
+} car_t;
+
 void signal_handler(int sig) {
 	printf("Recieved %d\n", sig);
 	running = 0;
