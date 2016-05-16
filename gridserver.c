@@ -28,11 +28,15 @@ void printField(char * field){
 }
 
 int main(int argc, char* argv[]) {
+	srand(time(NULL));	
 	// Buffer for Message
 	message_t msg;
 	
 	int c;
+	int carCount = 0;
 
+	car_t cars[26];
+	
 	// Signal handlers
 	if(signal(SIGHUP, signal_handler) == SIG_ERR) printf("\ncan't catch SIGHUP\n");
 	if(signal(SIGINT, signal_handler) == SIG_ERR) printf("\ncan't catch SIGINT\n");
@@ -94,7 +98,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	// Get message
-	while (running) {
+	while (1) {
 
 		if (msgrcv(msgid, &msg, sizeof(msg)-sizeof(long), 0, 0) == -1) {
 			// error handling
@@ -102,13 +106,39 @@ int main(int argc, char* argv[]) {
 				fprintf(stderr, "%s: Can't receive from message queue\n", argv[0]);
 			return EXIT_FAILURE;
 		}
+		// decode arguments in message
+		if(msg.mText[1] == 'c') {						
+			int posX = 0;
+			int posY = 0;
+
+			// get start pos
+			while(field[posY*x + posX] != ' ' && carCount < 26) {
+				posX = (rand() % x-2) + 1;
+				posY = (rand() % x-2) + 1;
+			}
+			if(posX == 0 || posY == 0){
+				// send message didnt work
+				continue;
+			}
+
+			char c = msg.mText[3];
+			// fill car with data
+			car_t car;			
+			car.name = c;
+			car.x = posX;
+			car.y = posY;
+
+			int i = 'A' - c;
+			cars[i] = car;			
+			
+			field[posY*x + posX] = c;
+
+			printField(field);
+		}
+
 		printf("Message received: %s\n", msg.mText);
+		// cars []
 	}
-
-	free(field);
-
-	msgctl (msgid, IPC_RMID, NULL);
-	return EXIT_SUCCESS;
 }
 
 
