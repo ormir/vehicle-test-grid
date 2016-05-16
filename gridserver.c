@@ -134,6 +134,12 @@ int main(int argc, char* argv[]) {
 			field[posY*x + posX] = c;
 
 			printField(field);
+
+			message_t msg_r;
+			msg_r.mType = car.name;
+			
+			sprintf(msg_r.mText, "Registration OK. Start position: %d,%d.", posX, posY);
+			msgsnd(msgid, &msg_r, sizeof(msg_r)-sizeof(long), 0);
 		}
 
 		printf("Message received: %s\n", msg.mText);
