@@ -2,7 +2,6 @@
 
 int main(int argc, char const *argv[]) {
 	message_t msg;
-	msg.mText = "Hallo";
 	int msgid = -1;
 
 	// Argument Handling
