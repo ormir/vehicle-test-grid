@@ -100,7 +100,7 @@ int main(int argc, char* argv[]) {
 	// Get message
 	while (1) {
 
-		if (msgrcv(msgid, &msg, sizeof(msg)-sizeof(long), 0, 0) == -1) {
+		if (msgrcv(msgid, &msg, sizeof(msg)-sizeof(long), 1, 0) == -1) {
 			// error handling
 			if(running == 1)
 				fprintf(stderr, "%s: Can't receive from message queue\n", argv[0]);

@@ -29,7 +29,8 @@ int main(int argc, char const *argv[]) {
 	// strcat(c, &tmp);
 
 	strncpy(msg.mText, c, MAX_DATA);
-	if(msgsnd(msgid, &msg, sizeof(msg)-sizeof(long), CREATE) == -1){
+	msg.mType = 1;
+	if(msgsnd(msgid, &msg, sizeof(msg)-sizeof(long), 0) == -1){
 		// error handling 
 		fprintf(stderr, "%s: Can't send message\n", argv[0]);
 		return EXIT_FAILURE;
@@ -38,7 +39,7 @@ int main(int argc, char const *argv[]) {
 
 	// Get message
 	while (1) {
-		if (msgrcv(msgid, &msg, sizeof(msg)-sizeof(long), 0, *argv[1]) == -1) {
+		if (msgrcv(msgid, &msg, sizeof(msg)-sizeof(long), *argv[1], 0) == -1) {
 			// error handling
 			sleep(1);
 			fprintf(stderr, "%s: Can't receive from message queue\n", argv[0]);			
