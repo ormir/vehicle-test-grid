@@ -163,7 +163,17 @@ int main(int argc, char* argv[]) {
                 default:
                     printf("Not recognised direction: %d\n", dir);            
             }
-
+            if(field[cy*x + cx] != ' '){
+                if(field[cy*x + cx] == '#'){
+                    cars[car].name = '#';
+                    // send kill
+                } else {
+                    cars[car].name = '#';
+                    car = field[cy*x + cx] - 'A';
+                    cars[car].name = '#';
+                    field[cy*x + cx] = ' ';
+                }
+            }
 
             printf("car: %d, direction: %c \n", car, dir);
         }
