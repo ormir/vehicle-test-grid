@@ -30,7 +30,7 @@ int main(int argc, char const *argv[]) {
     
     program = argv[0];
     channel = *argv[1];
-    
+     
     // Get message queue
     if((msgid = msgget(KEY, PERM)) == -1) {
         // error handling

@@ -11,10 +11,6 @@
 
 #define KEY 420257999
 #define PERM 0660
-#define OK 200
-#define FAIL 300
-#define CREATE 100
-#define T 666
 
 #define MAX_DATA 255
 
