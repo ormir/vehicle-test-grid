@@ -21,7 +21,7 @@ void *listenMsg(void *args) {
 int main(int argc, char const *argv[]) {
     
     char dir = ' ';
-    
+     
     // Argument Handling
     if(argc != 2) {
         fprintf(stderr, "Usage: %s <Message>\n", argv[0]);
