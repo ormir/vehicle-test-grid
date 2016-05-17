@@ -13,7 +13,7 @@ typedef struct {
 } car_t;
 
 void signal_handler(int sig) {
-    printf("Recieved %d\n", sig);
+    // printf("Recieved %d\n", sig);
     running = 0;
     msgctl (msgid, IPC_RMID, NULL);
     free(field);
@@ -140,8 +140,7 @@ int main(int argc, char* argv[]) {
             // mtext[6] contains car letter - A to get index in car array
             int car = msg.mText[6] - 'A';
             char dir = msg.mText[8];
-            int cx = cars
-            field
+
             printf("car: %d, direction: %c \n", car, dir);
         }
 
