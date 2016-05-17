@@ -123,7 +123,7 @@ int main(int argc, char* argv[]) {
             car.x = posX;
             car.y = posY;
 
-            int i = 'A' - c;
+            int i = c - 'A';
             cars[i] = car;          
             
             field[posY*x + posX] = c;
