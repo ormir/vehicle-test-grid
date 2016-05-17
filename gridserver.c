@@ -37,7 +37,10 @@ int main(int argc, char* argv[]) {
     int carCount = 0;
 
     car_t cars[26];
-
+    for(int i = 0; i < 26; i++){
+        cars[i].name = '#';
+    }
+    
     // Signal handlers
     if(signal(SIGHUP, signal_handler) == SIG_ERR) printf("\ncan't catch SIGHUP\n");
     if(signal(SIGINT, signal_handler) == SIG_ERR) printf("\ncan't catch SIGINT\n");
