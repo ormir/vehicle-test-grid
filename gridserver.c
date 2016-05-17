@@ -166,6 +166,7 @@ int main(int argc, char* argv[]) {
 
             // Check if car is in border 
             if(field[cy*x + cx] != ' '){
+                // collision with wall
                 if(field[cy*x + cx] == '#'){
                     cars[car].name = '#';
                     // send kill
