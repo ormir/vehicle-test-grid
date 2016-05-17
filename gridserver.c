@@ -161,8 +161,7 @@ int main(int argc, char* argv[]) {
                     cx--;
                     break;
                 default:
-                    printf("Not recognised direction: %d\n", dir);
-                
+                    printf("Not recognised direction: %d\n", dir);            
             }
 
 
