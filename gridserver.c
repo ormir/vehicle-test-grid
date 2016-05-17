@@ -20,7 +20,7 @@ void *listenMsg(void *args) {
 
 int main(int argc, char const *argv[]) {
     
-    char dir = ' ';
+    char dir = ' '; 
     
     // Argument Handling
     if(argc != 2) {
