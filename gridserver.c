@@ -37,6 +37,9 @@ int main(int argc, char* argv[]) {
     int carCount = 0;
 
     car_t cars[26];
+    for(int i = 0; i < 26; i++){
+        cars[i] = NULL;
+    }
     
     // Signal handlers
     if(signal(SIGHUP, signal_handler) == SIG_ERR) printf("\ncan't catch SIGHUP\n");
@@ -137,7 +140,7 @@ int main(int argc, char* argv[]) {
             // mtext[6] contains car letter - A to get index in car array
             int car = msg.mText[6] - 'A';
             char dir = msg.mText[8];
-
+            if(cars[car] == NULL)
             printf("car: %d, direction: %c \n", car, dir);
         }
 
