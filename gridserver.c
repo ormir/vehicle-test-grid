@@ -131,7 +131,11 @@ int main(int argc, char* argv[]) {
             msg_r.mType = car.name;
             
             sprintf(msg_r.mText, "Registration OK. Start position: %d,%d.", posX, posY);
-            msgsnd(msgid, &msg_r, sizeof(msg_r)-sizeof(long), 0);
+            msgsnd(msgid, &msg_r, sizeof(msg_r)-sizeof(long), 0);            
+        } else if(msg.mText[1] == 'm') {
+            int car = msg.mText[7];
+            char dir = msg.mText[9];
+            printf("car: %d, direction: %c \n", car, dir);
         }
 
         printf("Message received: %s\n", msg.mText);
