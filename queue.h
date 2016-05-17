@@ -26,7 +26,7 @@ typedef struct {
 // TODO 
 void printHelp(int f) {
 	if(f == 1) {
-		printf("Server");
+		printf("Server"); 
 	}
 }
 
