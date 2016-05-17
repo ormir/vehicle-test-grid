@@ -178,7 +178,12 @@ int main(int argc, char* argv[]) {
                     field[cy*x + cx] = ' ';
                     // send kill to client 2
                 }                
+            } else {
+                field[cy*x + cx] = cletter;
+                cars[car].x = cx;
+                cars[car].y = cy;
             }
+
             printField(field);
 
             printf("car: %d, direction: %c \n", car, dir);
