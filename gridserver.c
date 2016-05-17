@@ -130,6 +130,7 @@ int main(int argc, char* argv[]) {
             message_t msg_r;
             msg_r.mType = car.name;
             
+            // Send OK message to user
             sprintf(msg_r.mText, "Registration OK. Start position: %d,%d.", posX, posY);
             msgsnd(msgid, &msg_r, sizeof(msg_r)-sizeof(long), 0);            
         } else if(msg.mText[1] == 'm') {
