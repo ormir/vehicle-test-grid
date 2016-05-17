@@ -13,7 +13,7 @@ typedef struct {
 } car_t;
 
 void signal_handler(int sig) {
-    printf("Recieved %d\n", sig);
+    // printf("Recieved %d\n", sig);
     running = 0;
     msgctl (msgid, IPC_RMID, NULL);
     free(field);
@@ -37,6 +37,9 @@ int main(int argc, char* argv[]) {
     int carCount = 0;
 
     car_t cars[26];
+    for(int i = 0; i < 26; i++){
+        cars[i].name = '#';
+    }
     
     // Signal handlers
     if(signal(SIGHUP, signal_handler) == SIG_ERR) printf("\ncan't catch SIGHUP\n");
@@ -67,15 +70,6 @@ int main(int argc, char* argv[]) {
         return EXIT_FAILURE;
         // TODO printHelp();
     }
-
-    
-    // for (int k = 0; k < x; k++) {
-    //  field[k] = '#';
-    //  field[y*x+k] = '#';
-
-    //  field[((y-1)*x+1+k)]
-
-    // }
     
     // Create field
     field = malloc(sizeof(char)*x*y);
@@ -129,7 +123,7 @@ int main(int argc, char* argv[]) {
             car.x = posX;
             car.y = posY;
 
-            int i = 'A' - c;
+            int i = c - 'A';
             cars[i] = car;          
             
             field[posY*x + posX] = c;
@@ -139,8 +133,60 @@ int main(int argc, char* argv[]) {
             message_t msg_r;
             msg_r.mType = car.name;
             
+            // Send OK message        
             sprintf(msg_r.mText, "Registration OK. Start position: %d,%d.", posX, posY);
-            msgsnd(msgid, &msg_r, sizeof(msg_r)-sizeof(long), 0);
+            msgsnd(msgid, &msg_r, sizeof(msg_r)-sizeof(long), 0);     
+        } else if(msg.mText[1] == 'm') { // if message is "-m ..." make move
+            // mtext[6] contains car letter - A to get index in car array
+            char cletter = msg.mText[6];
+            int car = cletter - 'A';
+            char dir = msg.mText[8];
+            
+            int cx = cars[car].x;
+            int cy = cars[car].y;
+
+            field[cy*x + cx] = ' ';
+
+            switch(dir){
+                case 'N': 
+                    cy--;
+                    break;
+                case 'E':
+                    cx++;
+                    break;
+                case 'S':
+                    cy++;
+                    break;
+                case 'W':
+                    cx--;
+                    break;
+                default:
+                    printf("Not recognised direction: %d\n", dir);            
+            }
+
+            // Check if car is in border 
+            if(field[cy*x + cx] != ' '){
+                // collision with wall
+                if(field[cy*x + cx] == '#'){
+                    cars[car].name = '#';
+                    // send kill
+                } else {
+                    cars[car].name = '#';
+                    car = field[cy*x + cx] - 'A';
+                    // send kill to client 1
+                    cars[car].name = '#';
+                    field[cy*x + cx] = ' ';
+                    // send kill to client 2
+                }                
+            } else {
+                field[cy*x + cx] = cletter;
+                cars[car].x = cx;
+                cars[car].y = cy;
+            }
+
+            printField(field);
+
+            printf("car: %d, direction: %c \n", car, dir);
         }
 
         printf("Message received: %s\n", msg.mText);
