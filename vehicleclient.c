@@ -23,7 +23,7 @@ int main(int argc, char const *argv[]) {
 	char dir[2];
 
 	// Argument Handling
-	if(argc != 2) {
+	if(argc != 5) {
 		fprintf(stderr, "Usage: %s <Message>\n", argv[0]);
 		return EXIT_FAILURE;		
 	}	
