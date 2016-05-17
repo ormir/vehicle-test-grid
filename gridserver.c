@@ -163,6 +163,8 @@ int main(int argc, char* argv[]) {
                 default:
                     printf("Not recognised direction: %d\n", dir);            
             }
+
+            // Check if car is in border
             if(field[cy*x + cx] != ' '){
                 if(field[cy*x + cx] == '#'){
                     cars[car].name = '#';
