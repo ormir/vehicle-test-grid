@@ -133,7 +133,7 @@ int main(int argc, char* argv[]) {
             sprintf(msg_r.mText, "Registration OK. Start position: %d,%d.", posX, posY);
             msgsnd(msgid, &msg_r, sizeof(msg_r)-sizeof(long), 0);            
         } else if(msg.mText[1] == 'm') {
-            int car = msg.mText[6];
+            int car = msg.mText[6] - 'A';
             char dir = msg.mText[8];
             printf("car: %d, direction: %c \n", car, dir);
         }
