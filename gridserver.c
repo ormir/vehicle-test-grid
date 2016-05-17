@@ -130,12 +130,13 @@ int main(int argc, char* argv[]) {
             message_t msg_r;
             msg_r.mType = car.name;
             
-            // Send OK message to user
             sprintf(msg_r.mText, "Registration OK. Start position: %d,%d.", posX, posY);
-            msgsnd(msgid, &msg_r, sizeof(msg_r)-sizeof(long), 0);            
-        } else if(msg.mText[1] == 'm') {
+            msgsnd(msgid, &msg_r, sizeof(msg_r)-sizeof(long), 0);     
+        } else if(msg.mText[1] == 'm') { // if message is "-m ..." make move
+            // mtext[6] contains car letter - A to get index in car array
             int car = msg.mText[6] - 'A';
             char dir = msg.mText[8];
+
             printf("car: %d, direction: %c \n", car, dir);
         }
 
