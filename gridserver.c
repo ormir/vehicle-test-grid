@@ -170,8 +170,10 @@ int main(int argc, char* argv[]) {
                 } else {
                     cars[car].name = '#';
                     car = field[cy*x + cx] - 'A';
+                    // send kill to client 1
                     cars[car].name = '#';
                     field[cy*x + cx] = ' ';
+                    // send kill to client 2
                 }
             }
 
