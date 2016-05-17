@@ -38,13 +38,6 @@ int main(int argc, char* argv[]) {
 
     car_t cars[26];
     
-<<<<<<< HEAD
-    char dir = ' '; 
-    
-    // Argument Handling
-    if(argc != 5) {
-        fprintf(stderr, "Usage: %s <Message>\n", argv[0]);
-=======
     // Signal handlers
     if(signal(SIGHUP, signal_handler) == SIG_ERR) printf("\ncan't catch SIGHUP\n");
     if(signal(SIGINT, signal_handler) == SIG_ERR) printf("\ncan't catch SIGINT\n");
@@ -71,29 +64,9 @@ int main(int argc, char* argv[]) {
        }
     } else {
         printf("Not enough arguments");
->>>>>>> master
         return EXIT_FAILURE;
         // TODO printHelp();
     }
-
-    
-<<<<<<< HEAD
-    program = argv[0];
-    channel = *argv[1];
-     
-    // Get message queue
-    if((msgid = msgget(KEY, PERM)) == -1) {
-        // error handling
-        fprintf(stderr, "%s: Can't access message queue\n", argv[0]);
-        return EXIT_FAILURE;
-=======
-    // for (int k = 0; k < x; k++) {
-    //  field[k] = '#';
-    //  field[y*x+k] = '#';
-
-    //  field[((y-1)*x+1+k)]
-
-    // }
     
     // Create field
     field = malloc(sizeof(char)*x*y);
@@ -105,7 +78,6 @@ int main(int argc, char* argv[]) {
                 field[i*x+j] = ' ';
             }
         }
->>>>>>> master
     }
     
     printField(field);
