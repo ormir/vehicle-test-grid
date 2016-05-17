@@ -138,11 +138,33 @@ int main(int argc, char* argv[]) {
             msgsnd(msgid, &msg_r, sizeof(msg_r)-sizeof(long), 0);     
         } else if(msg.mText[1] == 'm') { // if message is "-m ..." make move
             // mtext[6] contains car letter - A to get index in car array
-            int car = msg.mText[6] - 'A';
+            char cletter = msg.mText[6];
+            int car = cletter - 'A';
             char dir = msg.mText[8];
             
             int cx = cars[car].x;
             int cy = cars[car].y;
+
+            field[cy*x + cx] = ' ';
+
+            switch(dir){
+                case 'N': 
+                    cy--;
+                    break;
+                case 'E':
+                    cx++;
+                    break;
+                case 'S':
+                    cy++;
+                    break;
+                case 'W':
+                    cx--;
+                    break;
+                default:
+                    // send msg not recognised direction
+                
+            }
+
 
             printf("car: %d, direction: %c \n", car, dir);
         }
