@@ -155,7 +155,7 @@ int main(int argc, char* argv[]) {
             // int i = c - 'A';
             cars[car.name - 'A'] = car;          
             
-            field[posY*x + posX] = c;
+            field[posY*x + posX] = car.name;
             printField(field);
 
             // Send OK message
