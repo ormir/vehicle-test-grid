@@ -33,6 +33,7 @@ int main(int argc, char const *argv[]) {
 	program = argv[0];
 	channel = *argv[1];
 
+	// Signal Handling
 	if(signal(SIGTERM, signal_handler) == SIG_ERR) printf("\ncan't catch SIGQUIT\n");
 
 	// Get message queue
