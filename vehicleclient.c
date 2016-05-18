@@ -4,8 +4,7 @@
 int msgid = -1;
 message_t msg;
 int channel;
-char *program;
-int threadRunning = 1;
+char const *program;
 pthread_mutex_t lock;
 
 void *listenMsg(void *args) {
@@ -16,13 +15,15 @@ void *listenMsg(void *args) {
 			sleep(1);			
 			// fprintf(stderr, "%s: Can't receive from message queue\n", program);
 		}
-
-		// Terminate signal
-		if(msg.mText[1] == 't') exit(0);
 		
 		printf("%s\n", msg.mText);
 	}
     pthread_exit(0);
+}
+
+void signal_handler(int sig) {
+    printf("Vechicle has been eleminated\n");
+    exit(0);
 }
 
 int main(int argc, char const *argv[]) {
@@ -37,6 +38,9 @@ int main(int argc, char const *argv[]) {
 	program = argv[0];
 	channel = *argv[1];
 
+	// Signal Handling
+	if(signal(SIGTERM, signal_handler) == SIG_ERR) printf("\ncan't catch SIGTERM\n");
+
 	// Get message queue
 	if((msgid = msgget(KEY, PERM)) == -1) {
 		// error handling 
@@ -47,7 +51,7 @@ int main(int argc, char const *argv[]) {
 	// Send message
 	msg.mType = 1;
 
-	sprintf(msg.mText, "-c %c", *argv[1]);
+	sprintf(msg.mText, "-c %c %d", *argv[1], getpid());
 
 	if(msgsnd(msgid, &msg, sizeof(msg)-sizeof(long), 0) == -1){
 		// error handling 
@@ -60,12 +64,12 @@ int main(int argc, char const *argv[]) {
 	// int rc = pthread_create(&thread, NULL, listenMsg, &t);
     pthread_create(&thread, NULL, listenMsg, &t);
     
-	while(threadRunning) {
-		scanf("%c", dir);
+	while(1) {
+		scanf("%s", dir);
         char tmp = dir[0];
 		msg.mType = 1;
 		sprintf(msg.mText, "-m -n %c %c ", channel, tmp);
-		if(threadRunning && msgsnd(msgid, &msg, sizeof(msg)-sizeof(long), 0) == -1){
+		if(msgsnd(msgid, &msg, sizeof(msg)-sizeof(long), 0) == -1){
 			// error handling 
 			fprintf(stderr, "%d: Can't send message\n", channel);
 		}
