@@ -14,6 +14,7 @@ int main(int argc, char* argv[]) {
       	system("clear");
    }
   
+  fclose(fp);
    // Read mesages from server
    while (1) {
 	   	if ((fp = fopen("display", "r")) != NULL) {
