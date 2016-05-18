@@ -49,7 +49,7 @@ int main(int argc, char const *argv[]) {
 	// Send message
 	msg.mType = 1;
 
-	sprintf(msg.mText, "-c %c", *argv[1]);
+	sprintf(msg.mText, "-c %c %d", *argv[1], getpid());
 
 	if(msgsnd(msgid, &msg, sizeof(msg)-sizeof(long), 0) == -1){
 		// error handling 
