@@ -63,8 +63,6 @@ int main(int argc, char const *argv[]) {
     pthread_create(&thread, NULL, listenMsg, &t);
     
 	while(1) {
-		sleep(0.1);
-		printf("Enter move");
 		scanf("%s", dir);
         char tmp = dir[0];
 		msg.mType = 1;
