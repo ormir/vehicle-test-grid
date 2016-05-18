@@ -111,15 +111,14 @@ int main(int argc, char* argv[]) {
     // Create named pipe
     FILE *fp;
 
-   if (mkfifo("foo", 0660) == -1) {
-      fprintf(stderr,"myfifo: Error creating fifo foo\n");
-      return EXIT_FAILURE;
-   }
+    if (mkfifo("foo", 0660) == -1) {
+        fprintf(stderr,"myfifo: Error creating fifo foo\n");
+        return EXIT_FAILURE;
+    }
 
-   if ((fp = fopen("foo", "w")) != NULL) 
-   {
-      fprintf(fp,"This is a FIFO test message\n");
-   }
+    if ((fp = fopen("foo", "w")) != NULL) {
+        fprintf(fp,"This is a FIFO test message\n");
+    }
 
     
     // Create Message Queue
