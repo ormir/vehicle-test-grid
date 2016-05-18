@@ -206,8 +206,5 @@ int main(int argc, char* argv[]) {
         } 
 
         printf("Message received: %s\n", msg.mText);
-        // Clean message
-        for (int i = 0; i < MAX_DATA; ++i)
-            msg.mText[i] = '\0';
     }
 }

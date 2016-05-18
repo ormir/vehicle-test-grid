@@ -17,15 +17,7 @@ void *listenMsg(void *args) {
 		}
 
 		// Terminate signal
-		if(msg.mText[1] == 't'){
-			// msg.mText[0] = '\0';
-			// msg.mText[1] = '\0';
-			// Clean message
-		    for (int i = 0; i < MAX_DATA; ++i)
-		        msg.mText[i] = '\0';
-		    
-			exit(0);
-		}
+		if(msg.mText[1] == 't') exit(0);
 		
 		printf("%s\n", msg.mText);
 	}
@@ -68,7 +60,7 @@ int main(int argc, char const *argv[]) {
     pthread_create(&thread, NULL, listenMsg, &t);
     
 	while(1) {
-		scanf("%c", dir);
+		scanf("%s", dir);
         char tmp = dir[0];
 		msg.mType = 1;
 		sprintf(msg.mText, "-m -n %c %c ", channel, tmp);
