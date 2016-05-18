@@ -5,6 +5,8 @@ int msgid = -1;
 message_t msg;
 int channel;
 char *program;
+int threadRunning = 1;
+pthread_mutex_t lock;
 
 void *listenMsg(void *args) {
 	// Get message
@@ -13,13 +15,17 @@ void *listenMsg(void *args) {
 			// error handling
 			sleep(1);			
 			// fprintf(stderr, "%s: Can't receive from message queue\n", program);
-		}		
+		}
+
+		// Terminate signal
+		if(msg.mText[1] == 't') exit(0);
+		
 		printf("%s\n", msg.mText);
 	}
+    pthread_exit(0);
 }
 
 int main(int argc, char const *argv[]) {
-
 	char dir[2];
 
 	// Argument Handling
@@ -51,20 +57,19 @@ int main(int argc, char const *argv[]) {
 
 	pthread_t thread;
 	long t = 0;
-	int rc = pthread_create(&thread, NULL, listenMsg, &t);
-	
-	while(1) {
-		scanf("%s", dir);
+	// int rc = pthread_create(&thread, NULL, listenMsg, &t);
+    pthread_create(&thread, NULL, listenMsg, &t);
+    
+	while(threadRunning) {
+		scanf("%c", dir);
         char tmp = dir[0];
 		msg.mType = 1;
 		sprintf(msg.mText, "-m -n %c %c ", channel, tmp);
-		if(msgsnd(msgid, &msg, sizeof(msg)-sizeof(long), 0) == -1){
+		if(threadRunning && msgsnd(msgid, &msg, sizeof(msg)-sizeof(long), 0) == -1){
 			// error handling 
 			fprintf(stderr, "%d: Can't send message\n", channel);
 		}
 	}
-
-	// listenMsg(argv[1],argv[1]);
 
 	return EXIT_SUCCESS;
 }

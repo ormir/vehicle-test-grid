@@ -30,6 +30,7 @@ void printField(char * field){
 }
 
 void sendMessage(char* msg, char destination) {
+     printf("Sending message: %s\n", msg);
     // Construct message
     message_t msg_r;
     msg_r.mType = destination;
@@ -41,6 +42,8 @@ void sendMessage(char* msg, char destination) {
     for (int i = 0; i < MAX_DATA; ++i)
         msg_send[i] = '\0';
 }
+
+
 
 int main(int argc, char* argv[]) {
     srand(time(NULL));  
@@ -180,14 +183,16 @@ int main(int argc, char* argv[]) {
                 // collision with wall
                 if(field[cy*x + cx] == '#'){
                     cars[car].name = '#';
-                    // send kill
+                    // TODO send kill
+                    sprintf(msg_send, "-t");
+                    sendMessage(msg_send, cletter);
                 } else {
                     cars[car].name = '#';
                     car = field[cy*x + cx] - 'A';
-                    // send kill to client 1
+                    // TODO send kill to client 1
                     cars[car].name = '#';
                     field[cy*x + cx] = ' ';
-                    // send kill to client 2
+                    // TODO send kill to client 2
                 }                
             } else {
                 field[cy*x + cx] = cletter;
@@ -197,7 +202,7 @@ int main(int argc, char* argv[]) {
 
             printField(field);
             printf("car: %d, direction: %c \n", car, dir);
-        }
+        } 
 
         printf("Message received: %s\n", msg.mText);
     }
