@@ -4,7 +4,7 @@
 int msgid = -1;
 message_t msg;
 int channel;
-char *program;
+char const *program;
 pthread_mutex_t lock;
 
 void *listenMsg(void *args) {
