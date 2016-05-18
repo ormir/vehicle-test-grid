@@ -109,7 +109,7 @@ int main(int argc, char* argv[]) {
     printField(field);
 
     // Create named pipe
-    
+    FILE *fp;
 
     
     // Create Message Queue
