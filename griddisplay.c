@@ -20,9 +20,16 @@ int main(int argc, char* argv[]) {
       if (fgets(puffer, MAX, fp) != NULL) {
         sscanf(puffer, "%d %d", &x, &y);
       }
+
+      while (fgets(puffer, MAX, fp) != NULL) 
+      {
+         printf("%s",puffer);
+      }
+
    }
 
-   printf("x: %d y: %d\n", x, y);
+
+
    pclose (fp); 
    return 0;
 } 
