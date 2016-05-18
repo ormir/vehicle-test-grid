@@ -115,7 +115,7 @@ int main(int argc, char* argv[]) {
     }
 
     if ((fp = fopen("display", "w")) != NULL) {
-        fprintf(fp,"%d %d\n", x, y);
+        fprintf(fp,"%d\n", x);
         fclose(fp);
     }
 
