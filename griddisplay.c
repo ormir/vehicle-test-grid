@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
       }
 
       while (fgets(puffer, x, fp) != NULL) {
-         printf("%s", puffer);
+         printf("%s\n", puffer);
       }
 
    }
