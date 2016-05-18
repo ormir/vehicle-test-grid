@@ -108,6 +108,8 @@ int main(int argc, char* argv[]) {
     
     printField(field);
 
+    // Create named pipe
+
     // Create Message Queue
     if((msgid = msgget(KEY, PERM | IPC_CREAT | IPC_EXCL )) == -1) {
         // error handling 
