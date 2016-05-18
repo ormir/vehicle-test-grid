@@ -5,7 +5,6 @@ int msgid = -1;
 message_t msg;
 int channel;
 char *program;
-int threadRunning = 1;
 pthread_mutex_t lock;
 
 void *listenMsg(void *args) {
@@ -19,8 +18,12 @@ void *listenMsg(void *args) {
 
 		// Terminate signal
 		if(msg.mText[1] == 't'){
-			msg.mText[0] = '\0';
-			msg.mText[1] = '\0';
+			// msg.mText[0] = '\0';
+			// msg.mText[1] = '\0';
+			// Clean message
+		    for (int i = 0; i < MAX_DATA; ++i)
+		        msg.mText[i] = '\0';
+		    
 			exit(0);
 		}
 		
@@ -64,12 +67,12 @@ int main(int argc, char const *argv[]) {
 	// int rc = pthread_create(&thread, NULL, listenMsg, &t);
     pthread_create(&thread, NULL, listenMsg, &t);
     
-	while(threadRunning) {
+	while(1) {
 		scanf("%c", dir);
         char tmp = dir[0];
 		msg.mType = 1;
 		sprintf(msg.mText, "-m -n %c %c ", channel, tmp);
-		if(threadRunning && msgsnd(msgid, &msg, sizeof(msg)-sizeof(long), 0) == -1){
+		if(msgsnd(msgid, &msg, sizeof(msg)-sizeof(long), 0) == -1){
 			// error handling 
 			fprintf(stderr, "%d: Can't send message\n", channel);
 		}
