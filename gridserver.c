@@ -195,8 +195,7 @@ int main(int argc, char* argv[]) {
                     cars[car].name = '#';
                     
                     // delete moving car
-                    sprintf(msg_send, "-t");
-                    sendMessage(msg_send, cletter);
+                    kill(cars[car].pid, SIGTERM);
 
                     // get standing car
                     car = field[cy*x + cx] - 'A';
@@ -204,8 +203,7 @@ int main(int argc, char* argv[]) {
                     field[cy*x + cx] = ' ';
                     
                     // delete standing car
-                    sprintf(msg_send, "-t");
-                    sendMessage(msg_send, car + 'A');
+                    kill(cars[car].pid, SIGTERM);
                 }                
             } else {
                 field[cy*x + cx] = cletter;
