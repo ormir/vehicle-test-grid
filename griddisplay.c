@@ -8,23 +8,22 @@ int main(int argc, char* argv[]) {
 
    // get initial x, y
    if ((fp = fopen("display", "r")) != NULL) {
-      if (fgets(puffer, MAX, fp) != NULL) {
-        sscanf(puffer, "%d %d", &x, &y);
-      }
+    	if (fgets(puffer, MAX, fp) != NULL) {
+    	    sscanf(puffer, "%d %d", &x, &y);
+      	}
 
-      while (fgets(puffer, x+1, fp) != NULL) {
-         printf("%s\n", puffer);
-      }
+      	while (fgets(puffer, x+1, fp) != NULL) {
+        	printf("%s\n", puffer);
+      	}
 
    }
 
    while (1) {
 	   	if ((fp = fopen("display", "r")) != NULL) {
-	      while (fgets(puffer, x+1, fp) != NULL) {
-	         printf("%s\n", puffer);
-	      }
-
-	   }
+		    while (fgets(puffer, x+1, fp) != NULL) {
+	        	printf("%s\n", puffer);
+	      	}
+	   	}
    }
 
    pclose (fp); 
