@@ -9,6 +9,7 @@ char * field;
 int x, y;
 char msg_send[MAX_DATA];
 car_t cars[26];
+FILE *fp;
 
 void printField(char * field){
     for(int i = 0; i < y; i++){
