@@ -5,6 +5,7 @@ int msgid = -1;
 int running = 1;
 char * field;
 int x, y;
+char msg_send[MAX_DATA];
 
 typedef struct {
     char name;
@@ -28,12 +29,24 @@ void printField(char * field){
     }
 }
 
+void sendMessage(char* msg, char destination) {
+    // Construct message
+    message_t msg_r;
+    msg_r.mType = destination;
+    sprintf(msg_r.mText, msg);
+
+    msgsnd(msgid, &msg_r, sizeof(msg_r)-sizeof(long), 0);
+
+    // Clean message
+    for (int i = 0; i < MAX_DATA; ++i)
+        msg_send[i] = '\0';
+}
+
 int main(int argc, char* argv[]) {
     srand(time(NULL));  
     // Buffer for Message
     message_t msg;
     
-    int c;
     int carCount = 0;
 
     car_t cars[26];
@@ -49,6 +62,7 @@ int main(int argc, char* argv[]) {
     
     // Argument Handling
     if(argc == 5) {
+        int c;
         while((c = getopt(argc, argv, "x:y:")) != EOF) {
             switch(c) {
                 case 'x':
@@ -111,8 +125,9 @@ int main(int argc, char* argv[]) {
                 posX = (rand() % x-2) + 1;
                 posY = (rand() % x-2) + 1;
             }
+
+            // TODO send message didnt work
             if(posX == 0 || posY == 0){
-                // send message didnt work
                 continue;
             }
 
@@ -127,15 +142,11 @@ int main(int argc, char* argv[]) {
             cars[i] = car;          
             
             field[posY*x + posX] = c;
-
             printField(field);
 
-            message_t msg_r;
-            msg_r.mType = car.name;
-            
-            // Send OK message        
-            sprintf(msg_r.mText, "Registration OK. Start position: %d,%d.", posX, posY);
-            msgsnd(msgid, &msg_r, sizeof(msg_r)-sizeof(long), 0);     
+            // Send OK message
+            sprintf(msg_send, "Registration OK. Start position: %d,%d.", posX, posY);
+            sendMessage(msg_send, car.name);
         } else if(msg.mText[1] == 'm') { // if message is "-m ..." make move
             // mtext[6] contains car letter - A to get index in car array
             char cletter = msg.mText[6];
@@ -185,11 +196,9 @@ int main(int argc, char* argv[]) {
             }
 
             printField(field);
-
             printf("car: %d, direction: %c \n", car, dir);
         }
 
         printf("Message received: %s\n", msg.mText);
-        // cars []
     }
 }
