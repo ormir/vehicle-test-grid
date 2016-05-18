@@ -107,8 +107,6 @@ int main(int argc, char* argv[]) {
             }
         }
     }
-    
-    printField(field);
 
     // Create named pipe
     if (mkfifo("display", 0660) == -1) {
@@ -121,6 +119,7 @@ int main(int argc, char* argv[]) {
         fclose(fp);
     }
 
+    printField(field);
     
     // Create Message Queue
     if((msgid = msgget(KEY, PERM | IPC_CREAT | IPC_EXCL )) == -1) {
