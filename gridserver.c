@@ -66,6 +66,7 @@ int main(int argc, char* argv[]) {
     if(signal(SIGHUP, signal_handler) == SIG_ERR) printf("\ncan't catch SIGHUP\n");
     if(signal(SIGINT, signal_handler) == SIG_ERR) printf("\ncan't catch SIGINT\n");
     if(signal(SIGQUIT, signal_handler) == SIG_ERR) printf("\ncan't catch SIGQUIT\n");
+    if(signal(SIGTERM, signal_handler) == SIG_ERR) printf("\ncan't catch SIGQUIT\n");
 
     
     // Argument Handling
@@ -129,6 +130,10 @@ int main(int argc, char* argv[]) {
             int posX = 0;
             int posY = 0;
 
+            car_t car;
+
+            sscanf(msg.mText, "-c %c %d", &time);
+
             // get start pos
             while(field[posY*x + posX] != ' ' && carCount < 26) {
                 posX = (rand() % x-2) + 1;
@@ -142,7 +147,7 @@ int main(int argc, char* argv[]) {
 
             char c = msg.mText[3];
             // fill car with data
-            car_t car;          
+            // car_t car;          
             car.name = c;
             car.x = posX;
             car.y = posY;
