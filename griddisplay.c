@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
         sscanf(puffer, "%d %d", &x, &y);
       }
 
-      while (fgets(puffer, x, fp) != NULL) {
+      while (fgets(puffer, x+1, fp) != NULL) {
          printf("%s\n", puffer);
       }
 
