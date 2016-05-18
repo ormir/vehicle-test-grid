@@ -201,7 +201,7 @@ int main(int argc, char* argv[]) {
                     
                     // delete standing car
                     sprintf(msg_send, "-t");
-                    sendMessage(msg_send, cletter);
+                    sendMessage(msg_send, car + 'A');
                 }                
             } else {
                 field[cy*x + cx] = cletter;
