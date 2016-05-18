@@ -146,9 +146,7 @@ int main(int argc, char* argv[]) {
             sscanf(msg.mText, "-c %c %d", &car.name, &car.pid);
             car.x = posX;
             car.y = posY;
-            cars[car.name - 'A'] = car; 
-
-            printf("Car PID: %d", car.pid);         
+            cars[car.name - 'A'] = car;       
 
             field[posY*x + posX] = car.name;
             printField(field);
