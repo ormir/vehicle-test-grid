@@ -199,7 +199,7 @@ int main(int argc, char* argv[]) {
                     cars[car].name = '#';
                     field[cy*x + cx] = ' ';
                     
-                    // delete still standing car
+                    // delete standing car
                     sprintf(msg_send, "-t");
                     sendMessage(msg_send, cletter);
                 }                
