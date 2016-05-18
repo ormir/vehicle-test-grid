@@ -6,6 +6,7 @@ int running = 1;
 char * field;
 int x, y;
 char msg_send[MAX_DATA];
+car_t cars[26];
 
 typedef struct {
     char name;
