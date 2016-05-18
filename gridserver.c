@@ -189,11 +189,18 @@ int main(int argc, char* argv[]) {
                     sendMessage(msg_send, cletter);
                 } else {
                     cars[car].name = '#';
+                    
+                    // delete moving car
+                    sprintf(msg_send, "-t");
+                    sendMessage(msg_send, cletter);
+                    
                     car = field[cy*x + cx] - 'A';
-                    // TODO send kill to client 1
                     cars[car].name = '#';
                     field[cy*x + cx] = ' ';
-                    // TODO send kill to client 2
+                    
+                    // delete still standing car
+                    sprintf(msg_send, "-t");
+                    sendMessage(msg_send, cletter);
                 }                
             } else {
                 field[cy*x + cx] = cletter;
