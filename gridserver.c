@@ -49,6 +49,7 @@ void signal_handler(int sig) {
     msgctl (msgid, IPC_RMID, NULL);
     fclose(fp);
     free(field);
+    exit(0);
 }
 
 
