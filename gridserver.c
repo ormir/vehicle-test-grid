@@ -193,7 +193,8 @@ int main(int argc, char* argv[]) {
                     // delete moving car
                     sprintf(msg_send, "-t");
                     sendMessage(msg_send, cletter);
-                    
+
+                    // get standing car
                     car = field[cy*x + cx] - 'A';
                     cars[car].name = '#';
                     field[cy*x + cx] = ' ';
