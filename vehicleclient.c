@@ -15,12 +15,6 @@ void *listenMsg(void *args) {
 			sleep(1);			
 			// fprintf(stderr, "%s: Can't receive from message queue\n", program);
 		}
-
-		// Terminate signal
-		if(msg.mText[1] == 't') {
-			printf("Vehicle has been eliminated\n");
-			exit(0);
-		}
 		
 		printf("%s\n", msg.mText);
 	}
