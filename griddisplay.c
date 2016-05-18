@@ -1,6 +1,15 @@
 #include <stdio.h>
 #define MAX 256
 
+void printField(char * field){
+    for(int i = 0; i < y; i++){
+        for(int j = 0; j < x; j++) {
+            printf("%c", field[i*x+j]);
+        }
+        printf("\n");
+    }
+}
+
 int main(int argc, char* argv[]) {
    FILE *fp;
    char puffer[MAX];
