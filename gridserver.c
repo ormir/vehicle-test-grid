@@ -225,9 +225,6 @@ int main(int argc, char* argv[]) {
             }
             system("clear");
             printField(field);
-            printf("car: %d, direction: %c \n", car, dir);
         } 
-
-        printf("Message received: %s\n", msg.mText);
     }
 }
