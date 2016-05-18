@@ -117,7 +117,9 @@ int main(int argc, char* argv[]) {
     if ((fp = fopen("display", "w")) != NULL) {
         fprintf(fp,"%d\n", x);
         fclose(fp);
-    }    
+    }
+
+    printField(field);
     
     // Create Message Queue
     if((msgid = msgget(KEY, PERM | IPC_CREAT | IPC_EXCL )) == -1) {
@@ -125,8 +127,6 @@ int main(int argc, char* argv[]) {
         fprintf(stderr, "%s: Error creating message queue\n", argv[0]);
         return EXIT_FAILURE;
     }
-
-    printField(field);
 
     // Get message
     while (1) {        
