@@ -14,7 +14,22 @@ typedef struct {
     
 } car_t;
 
+void signal_handler(int sig) {
+    // printf("Recieved %d\n", sig);
+    
+    // Quit all car processes
+    for(int i = 0; i < 26; i++){
+        if(cars[i].name != '#') {
+            sprintf(msg_send, "-t");
+            sendMessage(msg_send, cars[i].name);
+        }
+    }
 
+    // Delete message queue
+    running = 0;
+    msgctl (msgid, IPC_RMID, NULL);
+    free(field);
+}
 
 void printField(char * field){
     for(int i = 0; i < y; i++){
@@ -37,23 +52,6 @@ void sendMessage(char* msg, char destination) {
     // Clean message
     for (int i = 0; i < MAX_DATA; ++i)
         msg_send[i] = '\0';
-}
-
-void signal_handler(int sig) {
-    // printf("Recieved %d\n", sig);
-    
-    // Quit all car processes
-    for(int i = 0; i < 26; i++){
-        if(cars[i].name != '#') {
-            sprintf(msg_send, "-t");
-            sendMessage(msg_send, cars[i].name);
-        }
-    }
-
-    // Delete message queue
-    running = 0;
-    msgctl (msgid, IPC_RMID, NULL);
-    free(field);
 }
 
 
