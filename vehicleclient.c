@@ -17,7 +17,10 @@ void *listenMsg(void *args) {
 		}
 
 		// Terminate signal
-		if(msg.mText[1] == 't') exit(0);
+		if(msg.mText[1] == 't') {
+			printf("Vehicle has been eliminated\n");
+			exit(0);
+		}
 		
 		printf("%s\n", msg.mText);
 	}
