@@ -5,7 +5,7 @@ int main(int argc, char* argv[]) {
    FILE *fp;
    char puffer[MAX];
 
-   if ((fp=popen("ls -l","r"))!=NULL) {
+   if ((fp=popen("display", "r"))!=NULL) {
       while (fgets(puffer, MAX, fp) != NULL) 
       {
          printf("%s",puffer);
