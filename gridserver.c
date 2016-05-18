@@ -152,6 +152,7 @@ int main(int argc, char* argv[]) {
             cars[car.name - 'A'] = car;       
 
             field[posY*x + posX] = car.name;
+            system("clear");
             printField(field);
 
             // Send OK message
