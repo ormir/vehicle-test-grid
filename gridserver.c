@@ -62,7 +62,7 @@ int main(int argc, char* argv[]) {
     
     int carCount = 0;
 
-    car_t cars[26];
+    // car_t cars[26];
     for(int i = 0; i < 26; i++){
         cars[i].name = '#';
     }
