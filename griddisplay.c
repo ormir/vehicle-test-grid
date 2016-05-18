@@ -2,7 +2,6 @@
 #define MAX 256
 int x, y;
 
-
 void printField(char * field){
     for(int i = 0; i < y; i++){
         for(int j = 0; j < x; j++) {
