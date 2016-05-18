@@ -156,15 +156,6 @@ int main(int argc, char* argv[]) {
             int car = cletter - 'A';
             char dir = msg.mText[8];
             
-            // Send OK message        
-            sprintf(msg_r.mText, "Registration OK. Start position: %d,%d.", posX, posY);
-            msgsnd(msgid, &msg_r, sizeof(msg_r)-sizeof(long), 0);     
-        } else if(msg.mText[1] == 'm') { // if message is "-m ..." make move
-            // mtext[6] contains car letter - A to get index in car array
-            char cletter = msg.mText[6];
-            int car = cletter - 'A';
-            char dir = msg.mText[8];
-
             int cx = cars[car].x;
             int cy = cars[car].y;
 
@@ -192,7 +183,6 @@ int main(int argc, char* argv[]) {
                 // collision with wall
                 if(field[cy*x + cx] == '#'){
                     cars[car].name = '#';
-
                     // TODO send kill
                     sprintf(msg_send, "-t");
                     sendMessage(msg_send, cletter);
@@ -212,7 +202,7 @@ int main(int argc, char* argv[]) {
 
             printField(field);
             printf("car: %d, direction: %c \n", car, dir);
-        }
+        } 
 
         printf("Message received: %s\n", msg.mText);
     }
