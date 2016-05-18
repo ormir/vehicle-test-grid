@@ -132,7 +132,7 @@ int main(int argc, char* argv[]) {
 
             car_t car;
 
-            sscanf(msg.mText, "-c %c %d", &time);
+            sscanf(msg.mText, "-c %c %d", &car.name, &car.pid);
 
             // get start pos
             while(field[posY*x + posX] != ' ' && carCount < 26) {
