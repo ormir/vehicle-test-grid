@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
    // get initial x, y
    if ((fp = fopen("display", "r")) != NULL) {
       if (fgets(puffer, MAX, fp) != NULL) {
-         printf("%s",puffer);
+        sscanf(puffer, "%d %d", &x, &y);
       }
    }
    pclose (fp); 
