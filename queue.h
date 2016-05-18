@@ -19,6 +19,11 @@ typedef struct {
 	char mText[MAX_DATA];
 } message_t;
 
+typedef struct {
+    char name;
+    int x, y;
+} car_t;
+
 // TODO 
 void printHelp(int f) {
 	if(f == 1) {
