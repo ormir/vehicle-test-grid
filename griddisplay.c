@@ -22,12 +22,10 @@ int main(int argc, char* argv[]) {
       }
 
       while (fgets(puffer, MAX, fp) != NULL) {
-         printf("%s",puffer);
+         printf("%s", puffer);
       }
 
    }
-
-
 
    pclose (fp); 
    return 0;
