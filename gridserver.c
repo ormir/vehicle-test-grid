@@ -8,11 +8,7 @@ int x, y;
 char msg_send[MAX_DATA];
 car_t cars[26];
 
-typedef struct {
-    char name;
-    int x, y;
-    
-} car_t;
+
 
 void signal_handler(int sig) {
     // printf("Recieved %d\n", sig);
