@@ -145,15 +145,15 @@ int main(int argc, char* argv[]) {
                 continue;
             }
 
-            char c = msg.mText[3];
+            // char c = msg.mText[3];
             // fill car with data
             // car_t car;          
-            car.name = c;
+            // car.name = c;
             car.x = posX;
             car.y = posY;
 
-            int i = c - 'A';
-            cars[i] = car;          
+            // int i = c - 'A';
+            cars[car.name - 'A'] = car;          
             
             field[posY*x + posX] = c;
             printField(field);
