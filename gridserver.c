@@ -16,6 +16,8 @@ typedef struct {
 void signal_handler(int sig) {
     // printf("Recieved %d\n", sig);
     
+    // Quit all car processes
+
     // Delete message queue
     running = 0;
     msgctl (msgid, IPC_RMID, NULL);
