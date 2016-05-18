@@ -188,8 +188,9 @@ int main(int argc, char* argv[]) {
                 if(field[cy*x + cx] == '#'){
                     cars[car].name = '#';
                     // TODO send kill
-                    sprintf(msg_send, "-t");
-                    sendMessage(msg_send, cletter);
+                    kill(cars[car].pid, SIGTERM);
+                    // sprintf(msg_send, "-t");
+                    // sendMessage(msg_send, cletter);
                 } else {
                     cars[car].name = '#';
                     
