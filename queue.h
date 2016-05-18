@@ -22,6 +22,7 @@ typedef struct {
 typedef struct {
     char name;
     int x, y;
+    int pid;
 } car_t;
 
 // TODO 
