@@ -13,7 +13,7 @@ FILE *fp;
 
 void printField(char * field){
     if ((fp = fopen("display", "w")) != NULL) {
-        fprintf(fp,"%s", field);
+        fprintf(fp, "%s", field);
         fclose(fp);
     }
 }
