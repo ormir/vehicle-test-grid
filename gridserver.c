@@ -47,7 +47,6 @@ void signal_handler(int sig) {
     // Delete message queue
     running = 0;
     msgctl (msgid, IPC_RMID, NULL);
-    fclose(fp);
     system("rm display");
     free(field);
     exit(0);
