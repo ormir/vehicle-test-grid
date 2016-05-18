@@ -114,7 +114,7 @@ int main(int argc, char* argv[]) {
 
     // Create named pipe
     if (mkfifo("display", 0660) == -1) {
-        fprintf(stderr,"myfifo: Error creating fifo foo\n");
+        fprintf(stderr,"myfifo: Error creating display foo\n");
         return EXIT_FAILURE;
     }
 
