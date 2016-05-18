@@ -129,9 +129,7 @@ int main(int argc, char* argv[]) {
         if(msg.mText[1] == 'c') {                       
             int posX = 0;
             int posY = 0;
-
             
-
             // get start pos
             while(field[posY*x + posX] != ' ' && carCount < 26) {
                 posX = (rand() % x-2) + 1;
@@ -149,7 +147,7 @@ int main(int argc, char* argv[]) {
             car.x = posX;
             car.y = posY;
             cars[car.name - 'A'] = car;          
-            
+
             field[posY*x + posX] = car.name;
             printField(field);
 
