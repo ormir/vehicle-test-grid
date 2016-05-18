@@ -1,5 +1,7 @@
 #include "queue.h"
 #include <pthread.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 int msgid = -1;
 int running = 1;
