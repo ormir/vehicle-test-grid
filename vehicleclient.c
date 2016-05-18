@@ -39,7 +39,7 @@ int main(int argc, char const *argv[]) {
 
 	// Signal Handling
 	if(signal(SIGTERM, signal_handler) == SIG_ERR) printf("\ncan't catch SIGTERM\n");
-	if(signal(SIGSEV, signal_handler) == SIG_ERR) printf("\ncan't catch SIGTERM\n");
+	if(signal(SIGSEGV, signal_handler) == SIG_ERR) printf("\ncan't catch SIGTERM\n");
 
 	// Get message queue
 	if((msgid = msgget(KEY, PERM)) == -1) {
