@@ -23,6 +23,7 @@ void *listenMsg(void *args) {
 
 void signal_handler(int sig) {
     printf("Vechicle has been eleminated\n");
+    exit(0);
 }
 
 int main(int argc, char const *argv[]) {
