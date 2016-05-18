@@ -1,5 +1,7 @@
 #include <stdio.h>
 #define MAX 256
+int x, int y;
+
 
 void printField(char * field){
     for(int i = 0; i < y; i++){
