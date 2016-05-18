@@ -130,9 +130,7 @@ int main(int argc, char* argv[]) {
             int posX = 0;
             int posY = 0;
 
-            car_t car;
-
-            sscanf(msg.mText, "-c %c %d", &car.name, &car.pid);
+            
 
             // get start pos
             while(field[posY*x + posX] != ' ' && carCount < 26) {
@@ -145,16 +143,13 @@ int main(int argc, char* argv[]) {
                 continue;
             }
 
-            // char c = msg.mText[3];
             // fill car with data
-            // car_t car;          
-            // car.name = c;
+            car_t car;
+            sscanf(msg.mText, "-c %c %d", &car.name, &car.pid);
             car.x = posX;
             car.y = posY;
 
-            // int i = c - 'A';
             cars[car.name - 'A'] = car;          
-            
             field[posY*x + posX] = car.name;
             printField(field);
 
