@@ -1,6 +1,6 @@
 #include <stdio.h>
 #define MAX 256
-int x, int y;
+int x, y;
 
 
 void printField(char * field){
