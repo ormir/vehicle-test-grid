@@ -19,7 +19,8 @@ void signal_handler(int sig) {
     // Quit all car processes
     for(int i = 0; i < 26; i++){
         if(cars[i].name != '#') {
-
+            sprintf(msg_send, "-t");
+            sendMessage(msg_send, cars[i].name);
         }
     }
 
