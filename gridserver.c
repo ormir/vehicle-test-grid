@@ -119,7 +119,7 @@ int main(int argc, char* argv[]) {
     }
 
     if ((fp = fopen("display", "w")) != NULL) {
-        fprintf(fp,"This is a FIFO test message\n");
+        fprintf(fp,"%d %d\n", x, y);
         fclose(fp);
     }
 
