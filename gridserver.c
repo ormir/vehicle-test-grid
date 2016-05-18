@@ -17,6 +17,11 @@ void signal_handler(int sig) {
     // printf("Recieved %d\n", sig);
     
     // Quit all car processes
+    for(int i = 0; i < 26; i++){
+        if(cars[i].name != '#'){
+            
+        }
+    }
 
     // Delete message queue
     running = 0;
