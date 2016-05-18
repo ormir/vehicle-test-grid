@@ -156,7 +156,6 @@ int main(int argc, char* argv[]) {
             int car = cletter - 'A';
             char dir = msg.mText[8];
             
-<<<<<<< HEAD
             // Send OK message        
             sprintf(msg_r.mText, "Registration OK. Start position: %d,%d.", posX, posY);
             msgsnd(msgid, &msg_r, sizeof(msg_r)-sizeof(long), 0);     
@@ -165,9 +164,7 @@ int main(int argc, char* argv[]) {
             char cletter = msg.mText[6];
             int car = cletter - 'A';
             char dir = msg.mText[8];
-            
-=======
->>>>>>> master
+
             int cx = cars[car].x;
             int cy = cars[car].y;
 
@@ -195,16 +192,7 @@ int main(int argc, char* argv[]) {
                 // collision with wall
                 if(field[cy*x + cx] == '#'){
                     cars[car].name = '#';
-<<<<<<< HEAD
-                    // send kill
-                } else {
-                    cars[car].name = '#';
-                    car = field[cy*x + cx] - 'A';
-                    // send kill to client 1
-                    cars[car].name = '#';
-                    field[cy*x + cx] = ' ';
-                    // send kill to client 2
-=======
+
                     // TODO send kill
                     sprintf(msg_send, "-t");
                     sendMessage(msg_send, cletter);
@@ -215,7 +203,6 @@ int main(int argc, char* argv[]) {
                     cars[car].name = '#';
                     field[cy*x + cx] = ' ';
                     // TODO send kill to client 2
->>>>>>> master
                 }                
             } else {
                 field[cy*x + cx] = cletter;
@@ -224,14 +211,8 @@ int main(int argc, char* argv[]) {
             }
 
             printField(field);
-<<<<<<< HEAD
-
             printf("car: %d, direction: %c \n", car, dir);
         }
-=======
-            printf("car: %d, direction: %c \n", car, dir);
-        } 
->>>>>>> master
 
         printf("Message received: %s\n", msg.mText);
     }
