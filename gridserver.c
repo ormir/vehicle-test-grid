@@ -116,7 +116,7 @@ int main(int argc, char* argv[]) {
         return EXIT_FAILURE;
     }
 
-    if ((fp = fopen("foo", "w")) != NULL) {
+    if ((fp = fopen("display", "w")) != NULL) {
         fprintf(fp,"This is a FIFO test message\n");
     }
 
