@@ -118,8 +118,7 @@ int main(int argc, char* argv[]) {
     }
 
     // Get message
-    while (1) {
-
+    while (1) {        
         if (msgrcv(msgid, &msg, sizeof(msg)-sizeof(long), 1, 0) == -1) {
             // error handling
             if(running == 1)
@@ -212,7 +211,7 @@ int main(int argc, char* argv[]) {
                 cars[car].x = cx;
                 cars[car].y = cy;
             }
-
+            system("clear");
             printField(field);
             printf("car: %d, direction: %c \n", car, dir);
         } 
