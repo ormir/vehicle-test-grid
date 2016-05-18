@@ -22,20 +22,7 @@ void *listenMsg(void *args) {
 }
 
 void signal_handler(int sig) {
-    // printf("Recieved %d\n", sig);
-    
-    // Quit all car processes
-    for(int i = 0; i < 26; i++){
-        if(cars[i].name != '#') {
-            sprintf(msg_send, "-t");
-            sendMessage(msg_send, cars[i].name);
-        }
-    }
-
-    // Delete message queue
-    running = 0;
-    msgctl (msgid, IPC_RMID, NULL);
-    free(field);
+    printf("Vechicle has been eleminated\n");
 }
 
 int main(int argc, char const *argv[]) {
