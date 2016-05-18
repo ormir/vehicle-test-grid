@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -std=c99 -lpthread
+CFLAGS = -Wall -std=c99 -pthread
 
 all: gridserver vehicleclient griddisplay
 
