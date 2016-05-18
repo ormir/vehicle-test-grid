@@ -22,7 +22,7 @@ void sendMessage(char* msg, char destination) {
     // Construct message
     message_t msg_r;
     msg_r.mType = destination;
-    sprintf(msg_r.mText, msg);
+    sprintf(msg_r.mText, "%s",msg);
 
     msgsnd(msgid, &msg_r, sizeof(msg_r)-sizeof(long), 0);
 
