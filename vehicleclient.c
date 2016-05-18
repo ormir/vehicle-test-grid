@@ -18,7 +18,11 @@ void *listenMsg(void *args) {
 		}
 
 		// Terminate signal
-		if(msg.mText[1] == 't') exit(0);
+		if(msg.mText[1] == 't'){
+			msg.mText[0] = '\0';
+			msg.mText[1] = '\0';
+			exit(0);
+		}
 		
 		printf("%s\n", msg.mText);
 	}
