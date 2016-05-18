@@ -15,6 +15,7 @@ int main(int argc, char* argv[]) {
    FILE *fp;
    char puffer[MAX];
 
+   // get initial x, y
    if ((fp = fopen("display", "r")) != NULL) {
       while (fgets(puffer, MAX, fp) != NULL) 
       {
