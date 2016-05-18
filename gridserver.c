@@ -12,11 +12,9 @@ car_t cars[26];
 FILE *fp;
 
 void printField(char * field){
-    for(int i = 0; i < y; i++){
-        for(int j = 0; j < x; j++) {
-            printf("%c", field[i*x+j]);
-        }
-        printf("\n");
+    if ((fp = fopen("display", "w")) != NULL) {
+        fprintf(fp,"%s", field);
+        fclose(fp);
     }
 }
 
