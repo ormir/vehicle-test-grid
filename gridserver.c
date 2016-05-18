@@ -110,9 +110,8 @@ int main(int argc, char* argv[]) {
 
     // Create named pipe
     FILE *fp;
-    
-   if (mkfifo("foo", 0660) == -1)
-   {
+
+   if (mkfifo("foo", 0660) == -1) {
       fprintf(stderr,"myfifo: Error creating fifo foo\n");
       return EXIT_FAILURE;
    }
