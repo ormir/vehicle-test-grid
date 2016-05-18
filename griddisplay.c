@@ -17,8 +17,7 @@ int main(int argc, char* argv[]) {
 
    // get initial x, y
    if ((fp = fopen("display", "r")) != NULL) {
-      while (fgets(puffer, MAX, fp) != NULL) 
-      {
+      if (fgets(puffer, MAX, fp) != NULL) {
          printf("%s",puffer);
       }
    }
