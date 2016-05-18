@@ -38,7 +38,7 @@ int main(int argc, char const *argv[]) {
 	channel = *argv[1];
 
 	// Signal Handling
-	if(signal(SIGTERM, signal_handler) == SIG_ERR) printf("\ncan't catch SIGQUIT\n");
+	if(signal(SIGTERM, signal_handler) == SIG_ERR) printf("\ncan't catch SIGTERM\n");
 
 	// Get message queue
 	if((msgid = msgget(KEY, PERM)) == -1) {
