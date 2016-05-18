@@ -18,8 +18,8 @@ void signal_handler(int sig) {
     
     // Quit all car processes
     for(int i = 0; i < 26; i++){
-        if(cars[i].name != '#'){
-            
+        if(cars[i].name != '#') {
+
         }
     }
 
