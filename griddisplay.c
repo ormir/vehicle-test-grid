@@ -18,6 +18,7 @@ int main(int argc, char* argv[]) {
 
    }
 
+   // Read mesages from server
    while (1) {
 	   	if ((fp = fopen("display", "r")) != NULL) {
 		    while (fgets(puffer, x+1, fp) != NULL) {
