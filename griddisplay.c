@@ -11,6 +11,7 @@ int main(int argc, char* argv[]) {
     	if (fgets(puffer, MAX, fp) != NULL) {
     	    sscanf(puffer, "%d", &x);
       	}
+      	system("clear");
       	while (fgets(puffer, x+1, fp) != NULL) {
         	printf("%s\n", puffer);
       	}      	
