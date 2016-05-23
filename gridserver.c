@@ -19,7 +19,6 @@ void printField(char * field){
 }
 
 void sendMessage(char* msg, char destination) {
-     printf("Sending message: %s\n", msg);
     // Construct message
     message_t msg_r;
     msg_r.mType = destination;
@@ -82,10 +81,6 @@ int main(int argc, char* argv[]) {
                 case 'y':
                     y = atoi(optarg) + 2;
                     break;
-                case '?':
-                    // unguelgtiges Argument
-                    // TODO printHelp();
-                    break;
                 default:
                     printf("Unknown argument");
             }
@@ -93,7 +88,6 @@ int main(int argc, char* argv[]) {
     } else {
         printf("Not enough arguments");
         return EXIT_FAILURE;
-        // TODO printHelp();
     }
     
     // Create field
@@ -123,13 +117,13 @@ int main(int argc, char* argv[]) {
     
     // Create Message Queue
     if((msgid = msgget(KEY, PERM | IPC_CREAT | IPC_EXCL )) == -1) {
-        // error handling 
+        // error handling
         fprintf(stderr, "%s: Error creating message queue\n", argv[0]);
         return EXIT_FAILURE;
     }
 
     // Get message
-    while (1) {        
+    while (1) {
         if (msgrcv(msgid, &msg, sizeof(msg)-sizeof(long), 1, 0) == -1) {
             // error handling
             if(running == 1)
@@ -143,14 +137,9 @@ int main(int argc, char* argv[]) {
             int posY = 0;
 
             // get start pos
-            while(field[posY*x + posX] != ' ' && carCount < 26) {
+            while(field[posY*x + posX] != ' ' && carCount < (x - 2)*(y - 2)) {
                 posX = (rand() % x-2) + 1;
                 posY = (rand() % x-2) + 1;
-            }
-
-            // TODO send message didnt work
-            if(posX == 0 || posY == 0){
-                continue;
             }
 
             // fill car with data
@@ -158,17 +147,23 @@ int main(int argc, char* argv[]) {
             sscanf(msg.mText, "-c %c %d", &car.name, &car.pid);
             car.x = posX;
             car.y = posY;
+            // if field is full
+            if(posX == 0 || posY == 0){
+                kill(car.pid, SIGTERM);
+                continue;
+            } else {
+                carCount++;
+            }
             cars[car.name - 'A'] = car;       
 
             field[posY*x + posX] = car.name;
-            system("clear");
             printField(field);
 
             // Send OK message
             sprintf(msg_send, "Registration OK. Start position: %d,%d.", posX, posY);
             sendMessage(msg_send, car.name);
         } else if(msg.mText[1] == 'm') { // if message is "-m ..." make move
-            // mtext[6] contains car letter - A to get index in car array
+            // mtext[6] contains car letter -'A' to get index in car array
             char cletter = msg.mText[6];
             int car = cletter - 'A';
             char dir = msg.mText[8];
@@ -195,15 +190,13 @@ int main(int argc, char* argv[]) {
                     printf("Not recognised direction: %d\n", dir);            
             }
 
-            // Check if car is in border 
+            // Check if car is in border or other car
             if(field[cy*x + cx] != ' '){
                 // collision with wall
                 if(field[cy*x + cx] == '#'){
                     cars[car].name = '#';
-                    // TODO send kill
+                    carCount--;
                     kill(cars[car].pid, SIGTERM);
-                    // sprintf(msg_send, "-t");
-                    // sendMessage(msg_send, cletter);
                 } else {
                     cars[car].name = '#';
                     
@@ -217,14 +210,22 @@ int main(int argc, char* argv[]) {
                     
                     // delete standing car
                     kill(cars[car].pid, SIGTERM);
+
+                    carCount -= 2;
                 }                
             } else {
                 field[cy*x + cx] = cletter;
                 cars[car].x = cx;
                 cars[car].y = cy;
             }
-            system("clear");
             printField(field);
-        } 
+        } else if(msg.mText[1] == 'T'){
+            int ind = msg.mText[3] - 'A';
+            int cx = cars[ind].x;
+            int cy = cars[ind].y;
+
+            field[cy*x + cx] = ' ';
+            printField(field);
+        }
     }
 }

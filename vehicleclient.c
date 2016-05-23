@@ -11,12 +11,8 @@ void *listenMsg(void *args) {
 	// Get message
 	while (1) {
 		if (msgrcv(msgid, &msg, sizeof(msg)-sizeof(long), channel, 0) == -1) {
-			// error handling
-			sleep(1);			
-			// fprintf(stderr, "%s: Can't receive from message queue\n", program);
+			sleep(1);
 		}
-		
-		printf("%s\n", msg.mText);
 	}
     pthread_exit(0);
 }
@@ -68,6 +64,14 @@ int main(int argc, char const *argv[]) {
 		scanf("%s", dir);
         char tmp = dir[0];
 		msg.mType = 1;
+		
+		// process terminates
+		if(dir[0] == 'T'){
+			sprintf(msg.mText, "-T %c", channel);
+			msgsnd(msgid, &msg, sizeof(msg)-sizeof(long), 0);
+			return EXIT_SUCCESS;			
+		}
+
 		sprintf(msg.mText, "-m -n %c %c ", channel, tmp);
 		if(msgsnd(msgid, &msg, sizeof(msg)-sizeof(long), 0) == -1){
 			// error handling 
