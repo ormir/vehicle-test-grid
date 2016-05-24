@@ -22,6 +22,16 @@ void signal_handler(int sig) {
     exit(0);
 }
 
+void signal_handler_int(int sig) {
+	msg.mType = 1;
+    sprintf(msg.mText, "-T %c", channel);
+	if(msgsnd(msgid, &msg, sizeof(msg)-sizeof(long), 0) == -1) {
+		// error handling 
+		fprintf(stderr, "%d: Can't send message\n", channel);
+	}
+    exit(0);
+}
+
 int main(int argc, char const *argv[]) {
 	char dir[2];
 
@@ -36,6 +46,7 @@ int main(int argc, char const *argv[]) {
 
 	// Signal Handling
 	if(signal(SIGTERM, signal_handler) == SIG_ERR) printf("\ncan't catch SIGTERM\n");
+	if(signal(SIGINT, signal_handler_int) == SIG_ERR) printf("\ncan't catch SIGINT\n");
 
 	// Get message queue
 	if((msgid = msgget(KEY, PERM)) == -1) {
