@@ -1,3 +1,8 @@
+/*
+	Gruppenarbeit Auerbeck, Gjurgjej
+*/
+
+
 #include "queue.h"
 #include <pthread.h>
 

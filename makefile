@@ -10,7 +10,7 @@ gridserver.o: gridserver.c
 		$(CC) $(CFLAGS) -c gridserver.c
 
 vehicleclient: vehicleclient.o queue.h
-		$(CC) $(CFLAGS) -lpthread vehicleclient.o -o vehicleclient
+		$(CC) $(CFLAGS) -pthread vehicleclient.o -o vehicleclient
 
 vehicleclient.o: vehicleclient.c
 		$(CC) $(CFLAGS) -c vehicleclient.c

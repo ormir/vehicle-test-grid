@@ -1,4 +1,9 @@
+/*
+  Gruppenarbeit Auerbeck, Gjurgjej
+*/
+#define _BSD_SOURCE
 #include <stdio.h>
+#include <stdlib.h>
 #define MAX 256
 int x;
 
